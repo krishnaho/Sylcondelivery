@@ -179,8 +179,11 @@ function Profile() {
                             </Drawer.Root>
                         </div>
                     </div>
-                    <div className='flex justify-center items-center' style={{ padding: "5rem 0 10rem 0" }}>
-                        <img src={sylcon} alt="item category" style={{ width: '8rem' }} />
+                    <div className='flex justify-center items-center' style={{ padding: "20vh 0 0 0" }}>
+                        <img src={sylcon} alt="item category" style={{ width: '20rem' }} />
+                    </div>
+                    <div className='text-center mt-3'>
+                        Powered By <span style={{ fontSize: '15px', color: '#000', fontWeight: '700' }}>Howin</span><span style={{ fontSize: '12px', color: 'red', fontWeight: '600' }}>CLOUD</span>
                     </div>
 
                     {/* <Earnings />
