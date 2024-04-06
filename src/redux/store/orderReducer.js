@@ -7,6 +7,12 @@ const initialState = {
     accepted_order: [],
     pickedup_order: [],
     single_order: [],
+    single_returned_order: [],
+    pickedup_return_order: [],
+
+
+    accepted_return_order: [],
+
     order_history: [],
     isSuccess: false,
     message: "",
@@ -33,10 +39,28 @@ export const getAcceptedOrders = createAsyncThunk("store/getAcceptedOrders", asy
         throw error;
     }
 });
-
+export const getReturnedAcceptedOrders = createAsyncThunk("store/getReturnedAcceptedOrders", 
+async (formData) => {
+    try {
+        const response = await axios.post(WEBSITE_API_URL + "/get-accepted-returned-orders", formData);
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+        throw error;
+    }
+});
 export const getPickedUpOrders = createAsyncThunk("store/getPickedUpOrders", async (formData) => {
     try {
         const response = await axios.post(WEBSITE_API_URL + "/get-pickedup-orders", formData);
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+        throw error;
+    }
+});
+export const getPickedReturnUpOrders = createAsyncThunk("store/getPickedReturnUpOrders", async (formData) => {
+    try {
+        const response = await axios.post(WEBSITE_API_URL + "/get-pickedup-returned-orders", formData);
         return response.data;
     } catch (error) {
         console.log('error', error);
@@ -63,10 +87,28 @@ export const pickedupOrder = createAsyncThunk("store/pickedupOrder", async (form
         throw error;
     }
 });
+export const pickedReturnupOrder = createAsyncThunk("store/pickedReturnupOrder", async (formData) => {
+    try {
+        const response = await axios.post(WEBSITE_API_URL + "/pickedup-return-order", formData);
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+        throw error;
+    }
+});
 
 export const orderDelivered = createAsyncThunk("store/orderDelivered", async (formData) => {
     try {
         const response = await axios.post(WEBSITE_API_URL + "/order-delivered", formData);
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+        throw error;
+    }
+});
+export const orderDeliveredReturned = createAsyncThunk("store/orderDeliveredReturned", async (formData) => {
+    try {
+        const response = await axios.post(WEBSITE_API_URL + "/order-delivered-returned", formData);
         return response.data;
     } catch (error) {
         console.log('error', error);
@@ -85,6 +127,16 @@ export const getSingleOrder = createAsyncThunk("store/getSingleOrder", async (fo
         throw error;
     }
 });
+export const getSingleReturnOrder = createAsyncThunk("store/getSingleReturnOrder", async (formData) => {
+    try {
+        const response = await axios.post(WEBSITE_API_URL + "/get-single-returned-parnter-order", formData);
+        return response.data;
+    } catch (error) {
+        console.log('error', error);
+        throw error;
+    }
+});
+
 
 
 export const getOrderHistory = createAsyncThunk("store/getOrderHistory", async (formData) => {
@@ -129,6 +181,19 @@ const userSlice = createSlice({
             state.loading = false;
             state.isSuccess = false;
         },
+        [getReturnedAcceptedOrders.pending]: (state,) => {
+            state.loading = true;
+        },
+        [getReturnedAcceptedOrders.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.accepted_return_order = payload;
+            state.isSuccess = true;
+        },
+        [getReturnedAcceptedOrders.rejected]: (state, { payload }) => {
+            state.message = payload;
+            state.loading = false;
+            state.isSuccess = false;
+        },
 
         [getPickedUpOrders.pending]: (state,) => {
             state.loading = true;
@@ -139,6 +204,19 @@ const userSlice = createSlice({
             state.isSuccess = true;
         },
         [getPickedUpOrders.rejected]: (state, { payload }) => {
+            state.message = payload;
+            state.loading = false;
+            state.isSuccess = false;
+        },
+        [getPickedReturnUpOrders.pending]: (state,) => {
+            state.loading = true;
+        },
+        [getPickedReturnUpOrders.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.pickedup_return_order = payload;
+            state.isSuccess = true;
+        },
+        [getPickedReturnUpOrders.rejected]: (state, { payload }) => {
             state.message = payload;
             state.loading = false;
             state.isSuccess = false;
@@ -154,6 +232,19 @@ const userSlice = createSlice({
             state.isSuccess = true;
         },
         [getSingleOrder.rejected]: (state, { payload }) => {
+            state.message = payload;
+            state.loading = false;
+            state.isSuccess = false;
+        },
+        [getSingleReturnOrder.pending]: (state,) => {
+            state.loading = true;
+        },
+        [getSingleReturnOrder.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.single_returned_order = payload;
+            state.isSuccess = true;
+        },
+        [getSingleReturnOrder.rejected]: (state, { payload }) => {
             state.message = payload;
             state.loading = false;
             state.isSuccess = false;

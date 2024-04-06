@@ -20,6 +20,7 @@ import OrderHistoryDetails from "./components/Mobile/OrderHistoryDetails";
 import NoOrdersPage from "./components/Mobile/NoOrdersPage";
 import Profile from "./components/Mobile/Profile";
 import Calender from "./components/Mobile/Calender";
+import SingleOrderReturned from "./components/Mobile/SingleOrderreturned";
 /*======================Customer App End=========================*/
 
 const App = () => {
@@ -31,6 +32,8 @@ const App = () => {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/single-order/:order_id" element={<SingleOrder />} />
+                <Route path="/single-order-returned/:order_id" element={<SingleOrderReturned />} />
+
                 <Route path="/accepted-orders" element={<AcceptedOrders />} />
                 <Route path="/order-pickup" element={<OrderPickup />} />
                 <Route path="/pickedup-orders" element={<PickedUpOrders />} />
