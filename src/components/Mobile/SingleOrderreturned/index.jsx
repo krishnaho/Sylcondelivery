@@ -244,8 +244,8 @@ import { FormControl, InputGroup } from 'react-bootstrap'
                     </div>
                     {/* {singleOrder?.order_items?.map((item) => */}
                         <div className='flex justify-between'>
-                            <div className='font-semibold'>{singleReturnedOrder.name}</div>
-                            <div className='font-semibold'>{singleReturnedOrder.quantity + ' x ' + parseFloat(singleReturnedOrder.price)}</div>
+                            <div className='font-semibold'>{singleReturnedOrder?.name}</div>
+                            <div className='font-semibold'>{singleReturnedOrder?.quantity + ' x ' + parseFloat(singleReturnedOrder?.price)}</div>
                         </div>
                     {/* )} */}
                     <div className='flex justify-between'>
