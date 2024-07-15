@@ -240,11 +240,31 @@ function SingleOrder() {
                             <div className='font-bold'>Qty x Price</div>
                         </div>
                         {singleOrder?.order_items?.map((item) =>
+                         <div key={item.id} className='flex flex-col'>
                             <div className='flex justify-between'>
                                 <div className='font-semibold'>{item.name}</div>
-                                <div className='font-semibold'>{item.quantity + ' x ' + parseFloat(item.price)}</div>
+                                {!item.order_item_addons || item.order_item_addons.length==0 ?
+                                <div className='font-semibold'>{item.quantity + ' x ' + parseFloat(item.price)}</div> :''
+
+                                }               
                             </div>
+                            {item.order_item_addons && item.order_item_addons.length > 0 && (
+                                <div>
+                                    <hr className='my-2 border-t border-gray-300'/>
+                                    <div className='flex justify-end font-bold '>Addons:</div>
+                                    {
+                                        item.order_item_addons.map((addon) =>
+                                            <div key={addon.id} className='flex justify-end'>
+                                                <div className='font-semibold '>{addon.addon_name + ' x ' + parseFloat(addon.addon_price)}</div>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            ) }
+                         </div>
+                            
                         )}
+                        <hr className='my-3 border-t border-gray-500'/>
                         <div className='flex justify-between'>
                             <div className='font-bold'>Total</div>
                             <div className='font-bold'>Rs {parseFloat(singleOrder?.sub_total).toFixed(2)}</div>

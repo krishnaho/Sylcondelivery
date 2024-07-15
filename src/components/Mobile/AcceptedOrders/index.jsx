@@ -20,6 +20,8 @@ function AcceptedOrders() {
   const acceptedOrders = useSelector(
     (state) => state.order?.accepted_order?.data
   );
+  const singleOrder = useSelector((state) => state.order?.single_order?.data);
+
   const acceptedReturnedOrders = useSelector(
     (state) => state.order?.accepted_return_order?.data
   );
@@ -210,9 +212,12 @@ function AcceptedOrders() {
                     >
                       <div
                         style={{ color: "#070648", fontWeight: "700" }}
-                        className="px-3"
+                        className="px-3 "
                       >
-                        #{order.unique_order_id}
+                       <div className="flex justify-between items-center">
+                       #{order.unique_order_id}
+                       <div className="text-blue-500 text-xs font-light">View details</div>
+                       </div>
                       </div>
                       <hr style={{ color: "#989898" }} />
                       <div className="leading-loose text-muted px-3">
@@ -228,16 +233,18 @@ function AcceptedOrders() {
                             {order?.warehouse?.address}
                           </div>
                         </div>
-                        {order?.order_items?.map((item, index) => (
+                        {/* {order?.order_items?.map((item, index) => (
                           <div className="flex justify-between">
                             <div className="font-medium">
                               {index === 0 ? "Item Details" : null}
                             </div>
                             <div className="font-bold">
-                              {item.name + "(*" + item.quantity + ")"}
+                            {item.name}
+                            
                             </div>
                           </div>
-                        ))}
+                          
+                        ))} */}
                         <div className="flex justify-between">
                           <div className="font-medium">Payment mode</div>
                           <div className="font-bold">{order.payment_mode}</div>
